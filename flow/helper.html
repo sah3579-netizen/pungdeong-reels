@@ -1,0 +1,5 @@
+<!doctype html><meta charset="utf-8"><body>helper<script>
+(async()=>{const names=(location.hash.slice(1)||'').split(',').filter(Boolean);const out=[];
+for(const n of names){const r=await fetch('flow/'+n);out.push({name:n,type:'image/jpeg',buf:await r.arrayBuffer()});}
+if(window.opener){window.opener.postMessage({pdFiles:out},'*',out.map(o=>o.buf));document.body.textContent='sent '+out.length;setTimeout(()=>window.close(),1500);}else document.body.textContent='no opener';})();
+</script></body>
